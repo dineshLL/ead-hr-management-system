@@ -99,7 +99,8 @@
 										</h5>
 										<small class="media-meta">Software Engineer</small>
 									</div>
-									<button class="btn btn-secondary btn-sm">Edit</button>
+									<button class="btn btn-secondary btn-sm"
+										onclick="window.location.href='profile.jsp'">View</button>
 								</div>
 								<div class="media align-items-center">
 									<div class="avatar avatar-circle">
@@ -111,7 +112,7 @@
 										</h5>
 										<small class="media-meta">Software Engineer</small>
 									</div>
-									<button class="btn btn-secondary btn-sm">Edit</button>
+									<button class="btn btn-secondary btn-sm">View</button>
 								</div>
 								<div class="media align-items-center">
 									<div class="avatar avatar-circle">
@@ -123,7 +124,7 @@
 										</h5>
 										<small class="media-meta">Software Engineer</small>
 									</div>
-									<button class="btn btn-secondary btn-sm">Edit</button>
+									<button class="btn btn-secondary btn-sm">View</button>
 								</div>
 								<div class="media align-items-center">
 									<div class="avatar avatar-circle">
@@ -135,7 +136,7 @@
 										</h5>
 										<small class="media-meta">Software Engineer</small>
 									</div>
-									<button class="btn btn-secondary btn-sm">Edit</button>
+									<button class="btn btn-secondary btn-sm">View</button>
 								</div>
 								<div class="media align-items-center">
 									<div class="avatar avatar-circle">
@@ -147,7 +148,7 @@
 										</h5>
 										<small class="media-meta">Software Engineer</small>
 									</div>
-									<button class="btn btn-secondary btn-sm">Edit</button>
+									<button class="btn btn-secondary btn-sm">View</button>
 								</div>
 							</div>
 							<!-- ./media-list -->
@@ -160,11 +161,13 @@
 							<div class="widget">
 								<div class="widget-body text-center">
 									<h4 class="text-warning mb-3">ADD NEW EMPLOYEE</h4>
-									<p class="text-muted mb-0">Click on the blow button to add a new employee</p>
-									<br>
-									<a href="employees.jsp" class="btn px-5 btn-info">Create</a>
+									<p class="text-muted mb-0">Click on the blow button to add
+										a new employee</p>
+									<br> <a href="#" data-toggle="modal"
+										data-target="#composeModal"
+										class="btn action-panel-btn btn-info btn-block">Create</a>
 								</div>
-								
+
 								<!-- /.widget-body -->
 							</div>
 							<!-- /.widget -->
@@ -173,9 +176,10 @@
 							<div class="widget">
 								<div class="widget-body text-center">
 									<h4 class="text-warning mb-3">CREATE NEW TASK</h4>
-									<p class="text-muted mb-0">Click on the below button to create a new task</p>
-									<br>
-									<a href="employees.jsp" class="btn px-5 btn-success">Create</a>
+									<p class="text-muted mb-0">Click on the below button to
+										create a new task</p>
+									<br> <a href="/ead_hr_manager/tasks.jsp"
+										class="btn action-panel-btn btn-success btn-block">Create</a>
 								</div>
 								<!-- /.widget-body -->
 							</div>
@@ -186,36 +190,91 @@
 			</div>
 		</div>
 		<!-- .site-main -->
-	</div>
-	<script
-		src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/tether/dist/js/tether.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/sweetalert/dist/sweetalert.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/switchery/dist/switchery.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/waypoints/lib/shortcuts/sticky.min.js"></script>
-	<script
-		src="./assets/vendor/bower_components/counterup/jquery.counterup.min.js"></script>
-	<script src="./assets/global/js/plugins/firstlitter.js"></script>
-	<script src="./assets/global/js/plugins/video-modal.js"></script>
-	<!-- plugins for the current page -->
-	<script
-		src="./assets/vendor/bower_components/jquery-circle-progress/dist/circle-progress.js"></script>
-	<!-- site-wide scripts -->
-	<script src="./assets/global/js/main.js"></script>
-	<script src="js/site.js"></script>
-	<script src="js/menubar.js"></script>
+
+		<div class="modal fade" id="composeModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Add new employee</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="widget todo-widget">
+							<div class="widget-body p-border-a-0">
+								<form>
+									<div class="form-group">
+										<label for="formGroupExampleInput">Name</label> <input
+											type="text" class="form-control" id="formGroupExampleInput"
+											placeholder="Dinesh Liyanage">
+									</div>
+									<div class="form-group">
+										<label for="formGroupExampleInput2">NIC number</label> <input
+											type="text" class="form-control" id="formGroupExampleInput2"
+											placeholder="940203929V">
+									</div>
+									<div class="form-group">
+										<label for="formGroupExampleInput2">Address</label> <input
+											type="text" class="form-control" id="formGroupExampleInput2"
+											placeholder="Pahalagama, Kitalawa">
+									</div>
+									<div class="form-group">
+										<label for="formGroupExampleInput2">Designation</label> <input
+											type="text" class="form-control" id="formGroupExampleInput2"
+											placeholder="Software Engineer">
+									</div>
+									<div class="form-group">
+										<label for="formGroupExampleInput2">User role</label> <input
+											type="text" class="form-control" id="formGroupExampleInput2"
+											placeholder="User role">
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal" class="btn btn-danger">Close
+							</button>
+							<button type="button" data-dismiss="modal" class="btn btn-info">
+								Save</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+
+		</div>
+		<script
+			src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/tether/dist/js/tether.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/switchery/dist/switchery.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/waypoints/lib/shortcuts/sticky.min.js"></script>
+		<script
+			src="./assets/vendor/bower_components/counterup/jquery.counterup.min.js"></script>
+		<script src="./assets/global/js/plugins/firstlitter.js"></script>
+		<script src="./assets/global/js/plugins/video-modal.js"></script>
+		<!-- plugins for the current page -->
+		<script
+			src="./assets/vendor/bower_components/jquery-circle-progress/dist/circle-progress.js"></script>
+		<!-- site-wide scripts -->
+		<script src="./assets/global/js/main.js"></script>
+		<script src="js/site.js"></script>
+		<script src="js/menubar.js"></script>
 </body>
 <!-- Mirrored from spantags.com/kiwi/leftbar/uikit.widgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 07 Oct 2017 04:34:19 GMT -->
 

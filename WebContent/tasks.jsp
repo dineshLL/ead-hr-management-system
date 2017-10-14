@@ -82,12 +82,136 @@
 		<div class="site-main">
 			<div class="site-content">
 				<div class="row">
-					
+					<div class="col-md-5 col-sm-6">
+						<div class="widget todo-widget">
+							<header class="widget-header">
+								<h4 class="widget-title">Task List</h4>
+							</header>
+							<hr class="widget-separator">
+							<div class="widget-body p-border-a-0">
+								<ul class="todo-list" style="list-style: none;">
+									<li class="todo-item">
+										<div class="checkbox checkbox-success">
+											<input type="checkbox" id="checkbox02"><label
+												for="checkbox02">Record The First Episode Of HTML
+												Tutorial</label>
+										</div>
+									</li>
+									<!-- /.todo-item -->
+									<li class="todo-item">
+										<div class="checkbox checkbox-success">
+											<input type="checkbox" id="checkbox2"><label
+												for="checkbox2">Prepare The Conference Schedule</label>
+										</div>
+									</li>
+									<!-- /.todo-item -->
+									<li class="todo-item">
+										<div class="checkbox checkbox-success">
+											<input type="checkbox" id="checkbox4" checked="checked"><label
+												for="checkbox4">Decide The Live Discussion Time</label>
+										</div>
+									</li>
+									<!-- /.todo-item -->
+									<li class="todo-item">
+										<div class="checkbox checkbox-success">
+											<input type="checkbox" id="checkbox3" checked="checked"><label
+												for="checkbox3">Prepare For The Next Project</label>
+										</div>
+									</li>
+									<!-- /.todo-item -->
+									<li class="todo-item">
+										<div class="checkbox checkbox-success">
+											<input type="checkbox" id="checkbox5" checked="checked"><label
+												for="checkbox5">Finish Up AngularJs Tutorial</label>
+										</div>
+									</li>
+									<!-- /.todo-item -->
+									<li class="todo-item">
+										<div class="checkbox checkbox-success">
+											<input type="checkbox" id="checkbox1" checked="checked"><label
+												for="checkbox1">Finish Kiwi Project</label>
+										</div>
+									</li>
+									<!-- /.todo-item -->
+								</ul>
+								<!-- /.todo-list -->
+							</div>
+						</div>
+						<!-- /.widget -->
+					</div>
+
+					<div class="col-md-3 col-sm-6"></div>
+					<div class="col-md-4 col-sm-6">
+						<div class="col-md-12 col-sm-6">
+							<div class="widget">
+								<div class="widget-body text-center">
+									<h4 class="text-warning mb-3">ASSIGN TASKS TO EMPLOYEES</h4>
+									<p class="text-muted mb-0">Click on the below button to
+										assign tasks to employees</p>
+									<br>
+									<a href="/ead_hr_manager/employees.jsp"
+										class="btn action-panel-btn btn-info btn-block">Assign</a>
+								</div>
+
+								<!-- /.widget-body -->
+							</div>
+							<!-- /.widget -->
+						</div>
+						<div class="col-md-12 col-sm-6">
+							<div class="widget">
+								<div class="widget-body text-center">
+									<h4 class="text-warning mb-3">CREATE NEW TASK</h4>
+									<p class="text-muted mb-0">Click on the below button to
+										create a new task</p>
+									<br> <a href="#" data-toggle="modal"
+										data-target="#composeModal"
+										class="btn action-panel-btn btn-success btn-block">Create</a>
+								</div>
+								<!-- /.widget-body -->
+							</div>
+							<!-- /.widget -->
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- .site-main -->
 	</div>
+	<div class="modal fade" id="composeModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Add new task</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="widget todo-widget">
+							<div class="widget-body p-border-a-0">
+								<form>
+									<div class="form-group">
+										<label for="formGroupExampleInput">Task description</label> <textarea
+											type="text" class="form-control" id="formGroupExampleInput"
+											placeholder=""> </textarea>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal" class="btn btn-danger">Close
+							</button>
+							<button type="button" data-dismiss="modal" class="btn btn-info">
+								Save</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+
+		</div>
 	<script
 		src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
 	<script

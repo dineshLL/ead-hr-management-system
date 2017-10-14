@@ -16,15 +16,21 @@
 	<div class="menubar-scroll-wrapper">
 		<div class="site-menubar-inner">
 			<ul class="site-menu">
-				<li><a href="employees.jsp" class="submenu-toggle"><span
+				<li
+					onclick="window.location='/ead_hr_manager/employees.jsp'"
+				><a href="employees.jsp" class="submenu-toggle"><span
 					class="brand-icon"><i class="fa fa-houzz"></i></span> <span
 						class="menu-text">Employees</span> <i
 						class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i></a></li>
-				<li><a href="user-roles.jsp" class="submenu-toggle"><span
+				<li
+					onclick="window.location='/ead_hr_manager/user-roles.jsp'"
+				><a href="user-roles.jsp" class="submenu-toggle"><span
 					class="brand-icon"><i class="fa fa-houzz"></i></span><span
 						class="menu-text">User roles</span> <i
 						class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i></a></li>
-				<li><a href="tasks.jsp" class="submenu-toggle"><span
+				<li
+					onclick="window.location='/ead_hr_manager/tasks.jsp'"
+				><a href="tasks.jsp" class="submenu-toggle"><span
 					class="brand-icon"><i class="fa fa-houzz"></i></span><span
 						class="menu-text">Tasks</span> <i
 						class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i></a></li>

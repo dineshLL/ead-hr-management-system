@@ -32,7 +32,7 @@
 					<span class="hamburger-box"><span class="hamburger-inner"></span></span>
 				</button></li>
 			<li class="nav-item d-flex align-items-center">
-				<h5 class="hidden-sm-down m-0 ml-3 page-title">Dashboard</h5>
+				<h5 class="hidden-sm-down m-0 ml-3 page-title" id="titleString">Dashboard</h5>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -50,3 +50,25 @@
 	</div>
 	<!-- /.navbar-collapse -->
 </nav>
+<script>
+
+(function() {
+	var url = window.location.href;
+	var title;
+
+	if(url.indexOf('home.jsp') > -1) {
+		title = "Home";
+	} else if(url.indexOf('user-roles.jsp') > -1) {
+		title = "User roles";
+	} else if(url.indexOf('employees.jsp') > -1) {
+		title = "Employees";
+	} else if(url.indexOf('tasks.jsp') > -1) {
+		title = "Tasks";
+	}
+		
+	document.getElementById("titleString").innerHTML = title;
+})();
+
+
+
+</script>

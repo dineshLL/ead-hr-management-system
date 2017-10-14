@@ -82,12 +82,112 @@
 		<div class="site-main">
 			<div class="site-content">
 				<div class="row">
-					
+					<div class="col-md-5 col-sm-6">
+						<div class="widget todo-widget">
+							<header class="widget-header">
+								<h4 class="widget-title">User roles</h4>
+							</header>
+							<hr class="widget-separator">
+							<div class="widget-body p-border-a-0">
+								<ul class="todo-list" style="list-style: none;">
+									<li class="todo-item">
+										<div>
+											<label for="checkbox02">Manager</label>
+										</div>
+									</li>
+								</ul>
+								<!-- /.todo-list -->
+							</div>
+						</div>
+						<!-- /.widget -->
+					</div>
+
+					<div class="col-md-3 col-sm-6"></div>
+					<div class="col-md-4 col-sm-6">
+						<div class="col-md-12 col-sm-6">
+							<div class="widget">
+								<div class="widget-body text-center">
+									<h4 class="text-warning mb-3">ADD NEW USER ROLE</h4>
+									<p class="text-muted mb-0">Click the below button to add
+										new user role</p>
+									<br> <a href="#" data-toggle="modal"
+										data-target="#composeModal"
+										class="btn action-panel-btn btn-primary btn-block">CREATE</a>
+								</div>
+
+								<!-- /.widget-body -->
+							</div>
+							<!-- /.widget -->
+						</div>
+
+						<div class="col-md-12 col-sm-6">
+							<div class="widget">
+								<div class="widget-body text-center">
+									<h4 class="text-warning mb-3">ASSIGN ROLES TO EMPLOYEES</h4>
+									<p class="text-muted mb-0">Click the below button to add or
+										update a user role of an employee</p>
+									<br> <a href="/ead_hr_manager/employees.jsp"
+										class="btn action-panel-btn btn-info btn-block">Assign</a>
+								</div>
+
+								<!-- /.widget-body -->
+							</div>
+							<!-- /.widget -->
+						</div>
+						<div class="col-md-12 col-sm-6">
+							<div class="widget">
+								<div class="widget-body text-center">
+									<h4 class="text-warning mb-3">CREATE NEW TASK</h4>
+									<p class="text-muted mb-0">Click on the below button to
+										create a new task</p>
+									<br> <a href="/ead_hr_manager/tasks.jsp"
+										class="btn action-panel-btn btn-success btn-block">Create</a>
+								</div>
+								<!-- /.widget-body -->
+							</div>
+							<!-- /.widget -->
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- .site-main -->
 	</div>
+	<div class="modal fade" id="composeModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Create new user role</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="widget todo-widget">
+							<div class="widget-body p-border-a-0">
+								<form>
+									<div class="form-group">
+										<label for="formGroupExampleInput">User role</label> <input
+											type="text" class="form-control" id="formGroupExampleInput"
+											placeholder="Manager" />
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal" class="btn btn-danger">Close
+							</button>
+							<button type="button" data-dismiss="modal" class="btn btn-info">
+								Save</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+
+		</div>
 	<script
 		src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
 	<script
