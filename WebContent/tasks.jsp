@@ -1,13 +1,15 @@
+<%@page import="com.ead.hrmgr.data.resources.TaskResource"%>
+<%@page import="com.ead.hrmgr.data.model.Task"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>Home | Manage Me</title>
-<meta name="description"
-	content="Kiwi is a premium adman dashboard template based on bootstrap">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,user-scalable=0">
 <link rel="apple-touch-icon" href="apple-touch-icon.html">
@@ -70,7 +72,10 @@
 	<!--[if lt IE 10]>
 	  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
-
+	<%
+		List<Task> taskList = new TaskResource().getTasks();
+		request.setAttribute("list", taskList);
+	%>
 	<jsp:include page='<%="static//header-nav.jsp"%>' />
 
 	<!-- .site-navbar -->
@@ -90,49 +95,14 @@
 							<hr class="widget-separator">
 							<div class="widget-body p-border-a-0">
 								<ul class="todo-list" style="list-style: none;">
-									<li class="todo-item">
-										<div class="checkbox checkbox-success">
-											<input type="checkbox" id="checkbox02"><label
-												for="checkbox02">Record The First Episode Of HTML
-												Tutorial</label>
-										</div>
-									</li>
-									<!-- /.todo-item -->
-									<li class="todo-item">
-										<div class="checkbox checkbox-success">
-											<input type="checkbox" id="checkbox2"><label
-												for="checkbox2">Prepare The Conference Schedule</label>
-										</div>
-									</li>
-									<!-- /.todo-item -->
-									<li class="todo-item">
-										<div class="checkbox checkbox-success">
-											<input type="checkbox" id="checkbox4" checked="checked"><label
-												for="checkbox4">Decide The Live Discussion Time</label>
-										</div>
-									</li>
-									<!-- /.todo-item -->
-									<li class="todo-item">
-										<div class="checkbox checkbox-success">
-											<input type="checkbox" id="checkbox3" checked="checked"><label
-												for="checkbox3">Prepare For The Next Project</label>
-										</div>
-									</li>
-									<!-- /.todo-item -->
-									<li class="todo-item">
-										<div class="checkbox checkbox-success">
-											<input type="checkbox" id="checkbox5" checked="checked"><label
-												for="checkbox5">Finish Up AngularJs Tutorial</label>
-										</div>
-									</li>
-									<!-- /.todo-item -->
-									<li class="todo-item">
-										<div class="checkbox checkbox-success">
-											<input type="checkbox" id="checkbox1" checked="checked"><label
-												for="checkbox1">Finish Kiwi Project</label>
-										</div>
-									</li>
-									<!-- /.todo-item -->
+									<c:forEach items="${list}" var="model">
+										<li class="todo-item">
+											<div class="checkbox checkbox-success">
+												<input type="checkbox" id="checkbox02"><label
+													for="checkbox02">${model.description}</label>
+											</div>
+										</li>
+									</c:forEach>
 								</ul>
 								<!-- /.todo-list -->
 							</div>
@@ -148,8 +118,7 @@
 									<h4 class="text-warning mb-3">ASSIGN TASKS TO EMPLOYEES</h4>
 									<p class="text-muted mb-0">Click on the below button to
 										assign tasks to employees</p>
-									<br>
-									<a href="/ead_hr_manager/employees.jsp"
+									<br> <a href="/ead_hr_manager/employees.jsp"
 										class="btn action-panel-btn btn-info btn-block">Assign</a>
 								</div>
 
@@ -177,41 +146,43 @@
 		</div>
 		<!-- .site-main -->
 	</div>
+
+	<!-- add task model design -->
+
 	<div class="modal fade" id="composeModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Add new task</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Add new task</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form action="/ead_hr_manager/api/tasks" method="POST">
 					<div class="modal-body">
 						<div class="widget todo-widget">
 							<div class="widget-body p-border-a-0">
-								<form>
-									<div class="form-group">
-										<label for="formGroupExampleInput">Task description</label> <textarea
-											type="text" class="form-control" id="formGroupExampleInput"
-											placeholder=""> </textarea>
-									</div>
-								</form>
+								<div class="form-group">
+									<label for="formGroupExampleInput">Task description</label>
+									<textarea class="form-control" name="description"
+										id="formGroupExampleInput" placeholder=""> </textarea>
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" data-dismiss="modal" class="btn btn-danger">Close
 							</button>
-							<button type="button" data-dismiss="modal" class="btn btn-info">
-								Save</button>
+							<button type="submit" class="btn btn-info">Save</button>
 						</div>
 					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
+				</form>
+				<!-- /.modal-content -->
 			</div>
-
+			<!-- /.modal-dialog -->
 		</div>
+
+	</div>
 	<script
 		src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
 	<script

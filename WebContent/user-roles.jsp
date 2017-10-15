@@ -1,5 +1,9 @@
+<%@page import="com.ead.hrmgr.data.model.Role"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ead.hrmgr.data.resources.RolesResource"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -70,7 +74,10 @@
 	<!--[if lt IE 10]>
 	  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
-
+	<%
+		List<Role> data = new RolesResource().getRoles();
+		request.setAttribute("list", data);
+	%>
 	<jsp:include page='<%="static//header-nav.jsp"%>' />
 
 	<!-- .site-navbar -->
@@ -90,11 +97,13 @@
 							<hr class="widget-separator">
 							<div class="widget-body p-border-a-0">
 								<ul class="todo-list" style="list-style: none;">
-									<li class="todo-item">
-										<div>
-											<label for="checkbox02">Manager</label>
-										</div>
-									</li>
+									<c:forEach items="${list}" var="role">
+										<li class="todo-item">
+											<div>
+												<label for="checkbox02">${role.title}</label>
+											</div>
+										</li>
+									</c:forEach>
 								</ul>
 								<!-- /.todo-list -->
 							</div>
@@ -154,40 +163,43 @@
 		<!-- .site-main -->
 	</div>
 	<div class="modal fade" id="composeModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Create new user role</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Create new user role</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form action="/ead_hr_manager/api/user-roles" method="POST">
 					<div class="modal-body">
 						<div class="widget todo-widget">
 							<div class="widget-body p-border-a-0">
-								<form>
-									<div class="form-group">
-										<label for="formGroupExampleInput">User role</label> <input
-											type="text" class="form-control" id="formGroupExampleInput"
-											placeholder="Manager" />
-									</div>
-								</form>
+								<div class="form-group">
+									<label for="formGroupExampleInput">Title</label> <input
+										type="text" class="form-control" id="formGroupExampleInput"
+										name="title" placeholder="Manager" />
+								</div>
+								<div class="form-group">
+									<label for="formGroupExampleInput">Title</label> <input
+										type="text" class="form-control" id="formGroupExampleInput"
+										name="description" placeholder="Manager" />
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" data-dismiss="modal" class="btn btn-danger">Close
 							</button>
-							<button type="button" data-dismiss="modal" class="btn btn-info">
-								Save</button>
+							<button type="submit" class="btn btn-info">Save</button>
 						</div>
 					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
+				</form>
 			</div>
-
+			<!-- /.modal-dialog -->
 		</div>
+
+	</div>
 	<script
 		src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
 	<script

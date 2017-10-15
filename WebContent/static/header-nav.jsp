@@ -64,8 +64,10 @@
 		title = "Employees";
 	} else if(url.indexOf('tasks.jsp') > -1) {
 		title = "Tasks";
+	} else if(url.indexOf('employee?id') > -1) {
+		title = "Profile";
 	}
-		
+	
 	document.getElementById("titleString").innerHTML = title;
 })();
 

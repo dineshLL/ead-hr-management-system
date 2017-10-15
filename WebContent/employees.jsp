@@ -1,5 +1,11 @@
+<%@page import="com.ead.hrmgr.data.model.Role"%>
+<%@page import="com.ead.hrmgr.data.resources.RolesResource"%>
+<%@page import="com.ead.hrmgr.data.model.Employee"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ead.hrmgr.data.resources.EmployeeResource"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -70,7 +76,13 @@
 	<!--[if lt IE 10]>
 	  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
-
+	<%
+		List<Employee> empList = new EmployeeResource().getEmployeeList();
+		List<Role> roleList = new RolesResource().getAvailableRoles();
+		
+		request.setAttribute("roles", roleList);
+		request.setAttribute("list", empList);
+	%>
 	<jsp:include page='<%="static//header-nav.jsp"%>' />
 
 	<!-- .site-navbar -->
@@ -89,71 +101,25 @@
 							</div>
 							<hr class="widget-separator m-0">
 							<div class="media-list">
-								<div class="media align-items-center">
-									<div class="avatar avatar-circle">
-										<img src="../assets/global/images/221.jpg" alt="">
+								<c:forEach items="${list}" var="employee">
+									<div class="media align-items-center">
+										<div class="avatar avatar-circle">
+											<img src="../assets/global/images/221.jpg" alt="">
+										</div>
+										<div class="media-body">
+											<h5 class="media-heading">
+												<a href="javascript:void(0)"><c:out
+														value="${employee.name}" /></a>
+											</h5>
+											<small class="media-meta"><c:out
+													value="${employee.empRole.title}" /></small>
+										</div>
+										<button class="btn btn-secondary btn-sm"
+											onclick="window.location.href='/ead_hr_manager/get_employee?id=${employee.employeeId}'">View</button>
 									</div>
-									<div class="media-body">
-										<h5 class="media-heading">
-											<a href="javascript:void(0)">Siripala De Silva</a>
-										</h5>
-										<small class="media-meta">Software Engineer</small>
-									</div>
-									<button class="btn btn-secondary btn-sm"
-										onclick="window.location.href='profile.jsp'">View</button>
-								</div>
-								<div class="media align-items-center">
-									<div class="avatar avatar-circle">
-										<img src="../assets/global/images/221.jpg" alt="">
-									</div>
-									<div class="media-body">
-										<h5 class="media-heading">
-											<a href="javascript:void(0)">Siripala De Silva</a>
-										</h5>
-										<small class="media-meta">Software Engineer</small>
-									</div>
-									<button class="btn btn-secondary btn-sm">View</button>
-								</div>
-								<div class="media align-items-center">
-									<div class="avatar avatar-circle">
-										<img src="../assets/global/images/221.jpg" alt="">
-									</div>
-									<div class="media-body">
-										<h5 class="media-heading">
-											<a href="javascript:void(0)">Siripala De Silva</a>
-										</h5>
-										<small class="media-meta">Software Engineer</small>
-									</div>
-									<button class="btn btn-secondary btn-sm">View</button>
-								</div>
-								<div class="media align-items-center">
-									<div class="avatar avatar-circle">
-										<img src="../assets/global/images/221.jpg" alt="">
-									</div>
-									<div class="media-body">
-										<h5 class="media-heading">
-											<a href="javascript:void(0)">Siripala De Silva</a>
-										</h5>
-										<small class="media-meta">Software Engineer</small>
-									</div>
-									<button class="btn btn-secondary btn-sm">View</button>
-								</div>
-								<div class="media align-items-center">
-									<div class="avatar avatar-circle">
-										<img src="../assets/global/images/221.jpg" alt="">
-									</div>
-									<div class="media-body">
-										<h5 class="media-heading">
-											<a href="javascript:void(0)">Siripala De Silva</a>
-										</h5>
-										<small class="media-meta">Software Engineer</small>
-									</div>
-									<button class="btn btn-secondary btn-sm">View</button>
-								</div>
+								</c:forEach>
 							</div>
-							<!-- ./media-list -->
 						</div>
-						<!-- .widget -->
 					</div>
 					<div class="col-md-3 col-sm-6"></div>
 					<div class="col-md-4 col-sm-6">
@@ -201,80 +167,78 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
-						<div class="widget todo-widget">
-							<div class="widget-body p-border-a-0">
-								<form>
+					<form action="/ead_hr_manager/api/employees" method="POST">
+						<div class="modal-body">
+							<div class="widget todo-widget">
+								<div class="widget-body p-border-a-0">
+
 									<div class="form-group">
 										<label for="formGroupExampleInput">Name</label> <input
 											type="text" class="form-control" id="formGroupExampleInput"
-											placeholder="Dinesh Liyanage">
+											name="name" placeholder="Dinesh Liyanage">
 									</div>
 									<div class="form-group">
-										<label for="formGroupExampleInput2">NIC number</label> <input
-											type="text" class="form-control" id="formGroupExampleInput2"
-											placeholder="940203929V">
+										<label for="formGroupExampleInput">Salary</label> <input
+											type="text" class="form-control" id="formGroupExampleInput1"
+											name="salary" placeholder="Dinesh Liyanage">
 									</div>
 									<div class="form-group">
-										<label for="formGroupExampleInput2">Address</label> <input
-											type="text" class="form-control" id="formGroupExampleInput2"
-											placeholder="Pahalagama, Kitalawa">
+										<label for="formGroupExampleInput">Address</label> <input
+											type="text" class="form-control" id="formGroupExampleInput3"
+											name="address" placeholder="Dinesh Liyanage">
 									</div>
 									<div class="form-group">
-										<label for="formGroupExampleInput2">Designation</label> <input
-											type="text" class="form-control" id="formGroupExampleInput2"
-											placeholder="Software Engineer">
+										<label for="formGroupExampleInput2">User role</label> <select
+											id="Author" name="role">
+											<c:forEach items="${roles}" var="role">
+												<option value="${role.roleId}" >${role.title}</option>
+											</c:forEach>
+										</select>
 									</div>
-									<div class="form-group">
-										<label for="formGroupExampleInput2">User role</label> <input
-											type="text" class="form-control" id="formGroupExampleInput2"
-											placeholder="User role">
-									</div>
-								</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" data-dismiss="modal"
+									class="btn btn-danger">Close</button>
+								<button name="btnSubmit" type="submit" class="btn btn-info">Save</button>
 							</div>
 						</div>
-						<div class="modal-footer">
-							<button type="button" data-dismiss="modal" class="btn btn-danger">Close
-							</button>
-							<button type="button" data-dismiss="modal" class="btn btn-info">
-								Save</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
+					</form>
 				</div>
-				<!-- /.modal-dialog -->
+				<!-- /.modal-content -->
 			</div>
-
+			<!-- /.modal-dialog -->
 		</div>
-		<script
-			src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/tether/dist/js/tether.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/sweetalert/dist/sweetalert.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/switchery/dist/switchery.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/waypoints/lib/shortcuts/sticky.min.js"></script>
-		<script
-			src="./assets/vendor/bower_components/counterup/jquery.counterup.min.js"></script>
-		<script src="./assets/global/js/plugins/firstlitter.js"></script>
-		<script src="./assets/global/js/plugins/video-modal.js"></script>
-		<!-- plugins for the current page -->
-		<script
-			src="./assets/vendor/bower_components/jquery-circle-progress/dist/circle-progress.js"></script>
-		<!-- site-wide scripts -->
-		<script src="./assets/global/js/main.js"></script>
-		<script src="js/site.js"></script>
-		<script src="js/menubar.js"></script>
+	</div>
+	<script
+		src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/tether/dist/js/tether.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/switchery/dist/switchery.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/waypoints/lib/shortcuts/sticky.min.js"></script>
+	<script
+		src="./assets/vendor/bower_components/counterup/jquery.counterup.min.js"></script>
+	<script src="./assets/global/js/plugins/firstlitter.js"></script>
+	<script src="./assets/global/js/plugins/video-modal.js"></script>
+	<!-- plugins for the current page -->
+	<script
+		src="./assets/vendor/bower_components/jquery-circle-progress/dist/circle-progress.js"></script>
+	<!-- site-wide scripts -->
+	<script src="./assets/global/js/main.js"></script>
+	<script src="js/site.js"></script>
+	<script src="js/menubar.js"></script>
 </body>
 <!-- Mirrored from spantags.com/kiwi/leftbar/uikit.widgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 07 Oct 2017 04:34:19 GMT -->
 

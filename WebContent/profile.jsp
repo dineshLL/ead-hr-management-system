@@ -1,5 +1,11 @@
+<%@page import="com.ead.hrmgr.data.resources.TaskResource"%>
+<%@page import="com.ead.hrmgr.data.model.Task"%>
+<%@page import="com.ead.hrmgr.data.resources.RolesResource"%>
+<%@page import="com.ead.hrmgr.data.model.Role"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -72,7 +78,14 @@
 	<![endif]-->
 
 	<jsp:include page='<%="static//header-nav.jsp"%>' />
+	<c:set var="model" value='${requestScope["model"]}' />
+	<%
+		List<Role> roleList = new RolesResource().getAvailableRoles();
+		List<Task> unAssignedTaskList = new TaskResource().getUnassignedTasks();
 
+		request.setAttribute("roles", roleList);
+		request.setAttribute("unAssignedTasks", unAssignedTaskList);
+	%>
 	<!-- .site-navbar -->
 	<div class="site-wrapper">
 
@@ -94,13 +107,13 @@
 						</div>
 						<div class="text-center">
 							<h5 class="mb-4">
-								<a href="javascript:void(0)">John Doe</a>
+								<a href="javascript:void(0)"><c:out value="${model.name}" /></a>
 							</h5>
 							<div class="d-flex justify-content-center">
 								<a href="javascript:void(0)" class="mr-5 theme-color"><i
-									class="fa fa-bolt mr-1"></i> Web Developer</a> <a
+									class="fa fa-bolt mr-1"></i>${model.empRole.title}</a> <a
 									href="javascript:void(0)" class="theme-color"><i
-									class="fa fa-map-marker mr-1"></i>Cairo, Egypt</a>
+									class="fa fa-map-marker mr-1"></i>${model.address}</a>
 							</div>
 						</div>
 					</div>
@@ -116,52 +129,33 @@
 								<hr class="widget-separator">
 								<div class="widget-body p-border-a-0">
 									<ul class="todo-list" style="list-style: none;">
-										<li class="todo-item">
-											<div class="checkbox checkbox-success">
-												<input type="checkbox" id="checkbox02"><label
-													for="checkbox02">Record The First Episode Of HTML
-													Tutorial</label>
-											</div>
-										</li>
-										<!-- /.todo-item -->
-										<li class="todo-item">
-											<div class="checkbox checkbox-success">
-												<input type="checkbox" id="checkbox2"><label
-													for="checkbox2">Prepare The Conference Schedule</label>
-											</div>
-										</li>
-										<!-- /.todo-item -->
-										<li class="todo-item">
-											<div class="checkbox checkbox-success">
-												<input type="checkbox" id="checkbox4" checked="checked"><label
-													for="checkbox4">Decide The Live Discussion Time</label>
-											</div>
-										</li>
-										<!-- /.todo-item -->
-										<li class="todo-item">
-											<div class="checkbox checkbox-success">
-												<input type="checkbox" id="checkbox3" checked="checked"><label
-													for="checkbox3">Prepare For The Next Project</label>
-											</div>
-										</li>
-										<!-- /.todo-item -->
-										<li class="todo-item">
-											<div class="checkbox checkbox-success">
-												<input type="checkbox" id="checkbox5" checked="checked"><label
-													for="checkbox5">Finish Up AngularJs Tutorial</label>
-											</div>
-										</li>
-										<!-- /.todo-item -->
-										<li class="todo-item">
-											<div class="checkbox checkbox-success">
-												<input type="checkbox" id="checkbox1" checked="checked"><label
-													for="checkbox1">Finish Kiwi Project</label>
-											</div>
-										</li>
-										<!-- /.todo-item -->
+										<c:forEach items="${model.tasks}" var="task">
+											<li class="todo-item">
+												<div class="checkbox checkbox-success">
+													<input type="checkbox" id="checkbox02"><label
+														for="checkbox02">${task.description}</label>
+												</div>
+											</li>
+										</c:forEach>
 									</ul>
 									<!-- /.todo-list -->
 								</div>
+								<footer class="widget-footer bg-faded">
+									<form action="/ead_hr_manager/api/update_tasks" method="POST">
+										<input type="hidden" value="${model.employeeId}" name="id">
+										<div class="form-group float-left">
+											<select class="form-control" name="task">
+												<c:forEach items="${unAssignedTasks}" var="task">
+													<option value="${task.taskId}">${task.description}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<button
+										type="submit"
+										class="btn btn-sm btn-success mr-3  float-right">Add new
+											task</button>
+									</form>
+								</footer>
 							</div>
 							<!-- /.widget -->
 						</div>
@@ -176,10 +170,10 @@
 									<form>
 										<div class="form-group">
 											<label for="formGroupExampleInput">Name</label> <input
-												type="text" class="form-control" id="formGroupExampleInput"
-												placeholder="Dinesh Liyanage">
+												readonly="readonly" type="text" class="form-control"
+												id="formGroupExampleInput" value="${model.name}">
 										</div>
-										<div class="form-group">
+										<!-- <div class="form-group">
 											<label for="formGroupExampleInput2">NIC number</label> <input
 												type="text" class="form-control" id="formGroupExampleInput2"
 												placeholder="940203929V">
@@ -193,11 +187,15 @@
 											<label for="formGroupExampleInput2">Designation</label> <input
 												type="text" class="form-control" id="formGroupExampleInput2"
 												placeholder="Software Engineer">
-										</div>
+										</div> -->
 										<div class="form-group">
-											<label for="formGroupExampleInput2">User role</label> <input
-												type="text" class="form-control" id="formGroupExampleInput2"
-												placeholder="User role">
+											<label for="exampleSelect1">Role</label> <select
+												class="form-control" id="exampleSelect1">
+												<option><c:out value="${model.empRole.title}" /></option>
+												<c:forEach items="${roles}" var="role">
+													<option value="${role.roleId}">${role.title}</option>
+												</c:forEach>
+											</select>
 										</div>
 									</form>
 								</div>
@@ -216,6 +214,58 @@
 		</div>
 		<!-- .site-main -->
 	</div>
+	<%-- <div class="modal fade" id="composeModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Allocate task</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="/ead_hr_manager/api/employees" method="POST">
+						<div class="modal-body">
+							<div class="widget todo-widget">
+								<div class="widget-body p-border-a-0">
+
+									<div class="form-group">
+										<label for="formGroupExampleInput">Name</label> <input
+											type="text" class="form-control" id="formGroupExampleInput"
+											name="name" placeholder="Dinesh Liyanage">
+									</div>
+									<div class="form-group">
+										<label for="formGroupExampleInput">Salary</label> <input
+											type="text" class="form-control" id="formGroupExampleInput1"
+											name="salary" placeholder="Dinesh Liyanage">
+									</div>
+									<div class="form-group">
+										<label for="formGroupExampleInput">Address</label> <input
+											type="text" class="form-control" id="formGroupExampleInput3"
+											name="address" placeholder="Dinesh Liyanage">
+									</div>
+									<div class="form-group">
+										<label for="formGroupExampleInput2">User role</label> <select
+											id="Author" name="role">
+											<c:forEach items="${roles}" var="role">
+												<option value="${role.roleId}" >${role.title}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" data-dismiss="modal"
+									class="btn btn-danger">Close</button>
+								<button name="btnSubmit" type="submit" class="btn btn-info">Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div> --%>
 	<script
 		src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
 	<script

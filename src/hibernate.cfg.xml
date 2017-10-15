@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hr_db</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
+  <property name="hibernate.connection.autocommit">true</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.connection.password"></property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
+  <property name="hibernate.max_fetch_depth">5</property>
+  <property name="hibernate.order_updates">true</property>
+  <property name="hibernate.order_inserts">true</property>
+  
+  
+  <mapping class="com.ead.hrmgr.data.model.Employee"/>
+  <mapping class="com.ead.hrmgr.data.model.Task"/>
+  <mapping class="com.ead.hrmgr.data.model.Role"/>
+  
+ </session-factory>
+</hibernate-configuration>
